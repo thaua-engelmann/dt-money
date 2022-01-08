@@ -1,0 +1,28 @@
+@import "../../config.scss";
+
+.header {
+    width: 100%;
+    height: 21.2rem;
+    background-color: $purple-color;
+
+    &-content {
+        max-width: 112rem;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        padding: 3.2rem 1.5rem;
+
+        &-button {
+            background-color: $purpleLight-color;
+            color: $white-color;
+            font-weight: 600;
+            border-radius: .5rem;
+            padding: 1.2rem 3.2rem;
+            transition: .2s opacity;
+
+            &:hover {
+                opacity: .9;
+            }
+        }
+    }
+}

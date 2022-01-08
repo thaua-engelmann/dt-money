@@ -1,0 +1,89 @@
+@import "../../config.scss";
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: .5s;
+
+    &.show {
+        opacity: 1;
+        visibility: visible;
+
+        .modal-box {
+            top: 0;
+        }
+    }
+
+    &-box {
+        width: 57.6rem;
+        height: 58.8rem;
+        background-color: $almost-white;
+        border-radius: .5rem;
+        position: relative;
+        top: -100vh;
+        transition: .5s;
+
+        &-content {
+            padding: 6.4rem 4.8rem;
+
+            h3 {
+                font-size: 2.4rem;
+                font-weight: 600;
+                color: $title-color;
+                margin-bottom: 3.2rem;
+            }
+
+            form {
+                width: 100%;
+
+                .input-group {
+                    margin-bottom: 1.6rem;
+
+                    input {
+                        padding: 2rem 2.4rem;
+                        border-radius: .5rem;
+                        background-color: #e7e9ee;
+                        border: 1px solid #d7d7d7;
+                        width: 100%;
+                    }
+                }
+
+                .submit-btn {
+                    margin-top: 2.4rem;
+                    text-align: center;
+                    
+                    button {
+                        background-color: $green-color;
+                        color: $white-color;
+                        font-weight: 600;
+                        border-radius: .5rem;
+                        width: 100%;
+                        padding: 2rem;
+                        transition: all .3s;
+
+                        &:hover {
+                            background-color: #32b886;
+                        }
+                    }
+                }
+            }
+        }
+
+        &-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            color: #a8a8b3;
+            font-size: 2rem;
+        }
+    }
+}

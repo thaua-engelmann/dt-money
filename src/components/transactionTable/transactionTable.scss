@@ -1,0 +1,46 @@
+@import "../../config.scss";
+
+.transactions {
+  width: 100%;
+  margin-top: 5rem;
+
+  table {
+    width: 100%;
+    text-align: left;
+    border-spacing: 0 0.6rem;
+
+    thead th {
+      font-weight: 400;
+      color: $text-color;
+      padding: 1rem 3rem;
+    }
+
+    tbody tr {
+      background-color: $white-color;
+
+      td {
+        padding: 2rem 3.2rem;
+        color: $text-color;
+
+        &:first-child {
+          color: $title-color;
+          border-top-left-radius: 0.5rem;
+          border-bottom-left-radius: 0.5rem;
+        }
+
+        &:last-child {
+          border-top-right-radius: 0.5rem;
+          border-bottom-right-radius: 0.5rem;
+        }
+
+        &.income {
+            color: $green-color;
+        }
+
+        &.outcome {
+            color: $red-color;
+        }
+      }
+    }
+  }
+}

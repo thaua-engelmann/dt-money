@@ -1,0 +1,38 @@
+@import "../../../config.scss";
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    button {
+        width: 100%;
+        color: $title-color;
+        border: 1.5px solid #969cb2;
+        border-radius: .5rem;
+        padding: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+
+        &:hover {
+            border: 1.5px solid #5a5c63;
+        }
+
+        img {
+            width: 2.4rem;
+            height: 2.4rem;
+        }
+
+        &.income-active {
+            background-color: rgba(51, 204, 149, .2);
+            border: 0
+        }
+
+        &.outcome-active {
+            background-color: rgba(229, 46, 77, .2);
+            border: 0;
+        }
+    }
+}
