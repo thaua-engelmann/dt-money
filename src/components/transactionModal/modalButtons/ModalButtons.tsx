@@ -5,12 +5,14 @@ import incomesImg from "../../../assets/incomes.svg";
 import outcomesImg from "../../../assets/outcomes.svg";
 
 type ModalButtonsProps = {
-  transactionType: string,
-  setTransactionType: (type: string) => void,
-}
+  transactionType: string;
+  setTransactionType: (type: string) => void;
+};
 
-const ModalButtons = ({transactionType, setTransactionType}: ModalButtonsProps) => {
-
+const ModalButtons = ({
+  transactionType,
+  setTransactionType,
+}: ModalButtonsProps) => {
   return (
     <div className="modal-buttons">
       <button

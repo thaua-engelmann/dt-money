@@ -17,6 +17,7 @@ body, input, button, textarea {
   font-family: "Poppins", sans-serif;
   font-size: 1.6rem;
   background-color: $almost-white;
+  overflow-x: hidden;
 }
 
 button {

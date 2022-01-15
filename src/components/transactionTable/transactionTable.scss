@@ -13,13 +13,59 @@
       font-weight: 400;
       color: $text-color;
       padding: 1rem 3rem;
+
+      &.delete {
+        color: $red-color;
+      }
     }
 
     tbody tr {
       background-color: $white-color;
+      animation: bounceInLeft 1.5s forwards;
+      visibility: hidden;
+
+      @keyframes bounceInLeft {
+        0% {
+          transform: translateX(-2000px);
+        }
+        60% {
+          transform: translateX(30px);
+        }
+        80% {
+          transform: translateX(-10px);
+        }
+        100% {
+          visibility: visible;
+          transform: translateX(0);
+        }
+      }
+
+      @for $i from 1 through 4 {
+        &:nth-child(#{$i}n) {
+          animation-delay: #{$i * 0.2}s;
+        }
+      }
+
+      &.deleted {
+        animation: bounceOutRight 1.5s forwards;
+        visibility: visible;
+
+        @keyframes bounceOutRight {
+          0% {
+            transform: translateX(0);
+          }
+          20% {
+            transform: translateX(-20px);
+          }
+          100% {
+            visibility: hidden;
+            transform: translateX(2000px);
+          }
+        }
+      }
 
       td {
-        padding: 2rem 3.2rem;
+        padding: 1.5rem 3.2rem;
         color: $text-color;
 
         &:first-child {
@@ -33,12 +79,30 @@
           border-bottom-right-radius: 0.5rem;
         }
 
-        &.income {
-            color: $green-color;
+        &.income-type {
+          color: $green-color;
         }
 
-        &.outcome {
-            color: $red-color;
+        &.outcome-type {
+          color: $red-color;
+        }
+
+        &.delete-transaction {
+          color: $red-color;
+        }
+
+        &.delete-transaction img {
+          color: $purple-color;
+          position: relative;
+          left: 1.2rem;
+          cursor: pointer;
+          width: 2.6rem;
+          height: 2.6rem;
+          transition: 0.4s;
+
+          &:hover {
+            transform: scale(1.3);
+          }
         }
       }
     }

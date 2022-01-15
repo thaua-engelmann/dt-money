@@ -1,9 +1,12 @@
-import { FormEvent, useEffect, useState } from "react";
-import "./transactionModal.scss";
+import { FormEvent, useEffect, useState, useContext } from "react";
 import { FaTimes } from "react-icons/fa";
 import ModalButtons from "./modalButtons/ModalButtons";
+import InputMask from "react-input-mask";
+import NumberFormat from "react-number-format";
 
-import api from "../../services/api";
+import { TransactionsContext } from "../../context/TransactionsContext";
+
+import "./transactionModal.scss";
 
 type ModalProps = {
   openTransactionModal: boolean;
@@ -14,10 +17,15 @@ const TransactionModal = ({
   openTransactionModal,
   setOpenTransactionModal,
 }: ModalProps) => {
+  const today = new Date().toLocaleString().slice(0, 10);
+
+  const { createTransaction } = useContext(TransactionsContext);
+
   const [transactionName, setTransactionName] = useState("");
   const [transactionAmount, setTransactionAmount] = useState(0);
-  const [transactionType, setTransactionType] = useState("");
+  const [transactionType, setTransactionType] = useState("income-type");
   const [transactionCategory, setTransactionCategory] = useState("");
+  const [transactionDate, setTransactionDate] = useState("");
 
   const handleClickOutside = (e: any) => {
     if (e.target.classList.contains("modal")) {
@@ -36,17 +44,26 @@ const TransactionModal = ({
 
   window.addEventListener("click", handleClickOutside);
 
-  const handleSubmitTransaction = (e: FormEvent) => {
+  const handleSubmitTransaction = async (e: FormEvent) => {
     e.preventDefault();
 
-    const data = {
-      transactionName,
-      transactionAmount,
-      transactionType,
-      transactionCategory,
-    };
+    await createTransaction({
+      name: transactionName,
+      amount: transactionAmount,
+      type: transactionType,
+      category: transactionCategory,
+      createdAt: transactionDate,
+    });
 
-    api.post("/transactions", data);
+    // Reset form values;
+    setTransactionName("");
+    setTransactionAmount(0);
+    setTransactionType("income-type");
+    setTransactionCategory("");
+    setTransactionDate("");
+
+    // Close modal just if the transaction was successfully created;
+    setOpenTransactionModal(false);
   };
 
   return (
@@ -61,14 +78,21 @@ const TransactionModal = ({
                 placeholder="Name"
                 value={transactionName}
                 onChange={(e) => setTransactionName(e.target.value)}
+                required
               />
             </div>
             <div className="input-group">
-              <input
-                type="text"
-                placeholder="Amount"
+              <NumberFormat
+                thousandSeparator
+                prefix="R$ "
+                placeholder="R$ 0,00"
+                isNumericString
                 value={transactionAmount}
-                onChange={(e) => setTransactionAmount(Number(e.target.value))}
+                onValueChange={(values: any) => {
+                  const { value } = values;
+                  setTransactionAmount(Number(value));
+                }}
+                required
               />
             </div>
             <div className="input-group">
@@ -83,6 +107,15 @@ const TransactionModal = ({
                 placeholder="Category"
                 value={transactionCategory}
                 onChange={(e) => setTransactionCategory(e.target.value)}
+              />
+            </div>
+            <div className="input-group">
+              <InputMask
+                mask="99/99/9999"
+                placeholder={today}
+                value={transactionDate}
+                onChange={(e) => setTransactionDate(e.target.value)}
+                required
               />
             </div>
             <div className="submit-btn">

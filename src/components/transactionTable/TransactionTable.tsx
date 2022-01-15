@@ -1,55 +1,69 @@
-import React, { useEffect } from 'react'
+import React, { useContext } from "react";
 import "./transactionTable.scss";
+import trashImg from "../../assets/trash.gif";
 
-import api from "../../services/api";
+// Context;
+import { TransactionsContext } from "../../context/TransactionsContext";
 
 const TransactionTable = () => {
 
-    useEffect(() => {
-        api.get("/transactions")
-        .then(response => console.log(response.data));
-    }, [])
+  const handleDeleteTransaction = (e: any) => {
+    e.target.parentElement.parentElement.classList.add('deleted');
 
-    return (
-        <div className="transactions">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Amount</th>
-                        <th>Category</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Website development</td>
-                        <td className="income">R$ 12.000,00</td>
-                        <td>Sell</td>
-                        <td>13/04/2021</td>
-                    </tr>
-                    <tr>
-                        <td>Hamburger</td>
-                        <td className="outcome">- R$ 59,00</td>
-                        <td>Food</td>
-                        <td>10/04/2021</td>
-                    </tr>
-                    <tr>
-                        <td>Flat rent</td>
-                        <td className="outcome">- R$ 1.200,00</td>
-                        <td>House</td>
-                        <td>23/03/2021</td>
-                    </tr>
-                    <tr>
-                        <td>Notebook</td>
-                        <td className="income">R$ 5.400,00</td>
-                        <td>Sell</td>
-                        <td>15/03/2021</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    )
-}
+    setTimeout(() => {
+      e.target.parentElement.parentElement.style.display = "none";
+    }, 1500)
+  }
+
+  const formatDate = (date: string | Date) => {
+    const dateTime = new Date(date);
+    const day = String(dateTime.getDate()).padStart(2, '0');
+    const month = String(dateTime.getMonth() + 1).padStart(2, '0');
+    const year = dateTime.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
+
+  const {transactions} = useContext(TransactionsContext);
+
+  return (
+    <div className="transactions">
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th className="delete">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transactions.map((transaction) => (
+            <tr key={transaction.id}>
+              <td>{transaction.name}</td>
+              <td className={transaction.type}>
+                {new Intl.NumberFormat("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                }).format(transaction.amount)}
+              </td>
+              {/* <td>{transaction.category === "" ? "none" : transaction.category}</td> */}
+              <td>{transaction.category || "none"}</td>
+              <td>
+                {
+                  formatDate(transaction.createdAt)
+                }
+              </td>
+              <td className="delete-transaction">
+                <img src={trashImg} alt="delete transaction icon" onClick={handleDeleteTransaction} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 export default TransactionTable;
