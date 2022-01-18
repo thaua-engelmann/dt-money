@@ -1,6 +1,6 @@
 # dt money | expanse tracker
 
-This project was developed using ReactJS & Typescript. At first, we were using MirageJS to create a fake API and then save new transactions on it by a modal form, and then return these new transactions data to a table.
+dt money is a simple, but very effective application to manage your finances. It allows you to register new incomes, outcomes and automatically calculates a final total based on the values you've entered. You can also set categories to each transaction, a date to your transaction and yet, if you want to, delete a transaction. 
 
 ## Available Scripts
 
