@@ -1,6 +1,8 @@
-# dt money | finance app
+# dt money | expanse tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was developed using ReactJS & Typescript. At first, we were using MirageJS to create a fake API and then save new transactions on it by a modal form, and then return these new transactions data to a table.
+
+My very first one project using Typescript. I am pretty sure that I have learned a lot!
 
 ## Available Scripts
 
