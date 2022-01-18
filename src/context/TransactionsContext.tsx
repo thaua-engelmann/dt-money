@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from "react";
-import api from "../services/api";
+import { createContext, useEffect, useReducer } from "react";
+import { transactionReducer } from "../reducers/transactionReducer";
 
 type Transaction = {
   id: number;
@@ -7,7 +7,7 @@ type Transaction = {
   amount: number;
   type: string;
   category: string;
-  createdAt: string;
+  date: string;
 };
 
 type TransactionInput = Omit<Transaction, "id">;
@@ -18,7 +18,7 @@ type TransactionProviderProps = {
 
 type TransactionContextProps = {
   transactions: Transaction[];
-  createTransaction: (transaction: TransactionInput) => Promise<void>;
+  dispatch: any;
 };
 
 export const TransactionsContext = createContext<TransactionContextProps>(
@@ -26,29 +26,21 @@ export const TransactionsContext = createContext<TransactionContextProps>(
 );
 
 const TransactionProvider = ({ children }: TransactionProviderProps) => {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [transactions, dispatch] = useReducer(transactionReducer, [], () => {
+    const localData = localStorage.getItem("transactions");
+
+    return localData ? JSON.parse(localData) : [];
+  });
 
   useEffect(() => {
-    api
-      .get("transactions")
-      .then((response) => setTransactions(response.data.transactions));
-  }, []);
-
-  const createTransaction = async (transactionInput: TransactionInput) => {
-    const response = await api.post("/transactions", transactionInput);
-    const { transaction } = response.data // const transaction = response.data.transaction;
-
-    setTransactions([
-      ...transactions,
-      transaction
-    ])
-  };
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions])
 
   return (
     <TransactionsContext.Provider
       value={{
         transactions,
-        createTransaction,
+        dispatch
       }}
     >
       {children}

@@ -1,6 +1,8 @@
 import React from "react";
 import "./card.scss";
 
+import { formatMoney } from "../../utils";
+
 type CardProps = {
   card: {
     title: string;
@@ -24,10 +26,7 @@ const Card = ({ card }: CardProps) => {
         </div>
       </div>
       <h1 className="card-amount">
-        {new Intl.NumberFormat("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-        }).format(card.amount)}
+        {formatMoney(card.amount)}
       </h1>
     </div>
   );

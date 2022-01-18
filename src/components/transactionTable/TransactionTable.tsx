@@ -5,26 +5,15 @@ import trashImg from "../../assets/trash.gif";
 // Context;
 import { TransactionsContext } from "../../context/TransactionsContext";
 
+// Utils;
+import { formatMoney, formatDate } from "../../utils";
+
 const TransactionTable = () => {
+  const { transactions, dispatch } = useContext(TransactionsContext);
 
-  const handleDeleteTransaction = (e: any) => {
-    e.target.parentElement.parentElement.classList.add('deleted');
-
-    setTimeout(() => {
-      e.target.parentElement.parentElement.style.display = "none";
-    }, 1500)
-  }
-
-  const formatDate = (date: string | Date) => {
-    const dateTime = new Date(date);
-    const day = String(dateTime.getDate()).padStart(2, '0');
-    const month = String(dateTime.getMonth() + 1).padStart(2, '0');
-    const year = dateTime.getFullYear();
-
-    return `${day}/${month}/${year}`;
-  }
-
-  const {transactions} = useContext(TransactionsContext);
+  const handleDeleteTransaction = (id: number) => {
+    dispatch({type: "REMOVE_TRANSACTION", id})
+  };
 
   return (
     <div className="transactions">
@@ -43,20 +32,17 @@ const TransactionTable = () => {
             <tr key={transaction.id}>
               <td>{transaction.name}</td>
               <td className={transaction.type}>
-                {new Intl.NumberFormat("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                }).format(transaction.amount)}
+                {formatMoney(transaction.amount)}
               </td>
               {/* <td>{transaction.category === "" ? "none" : transaction.category}</td> */}
               <td>{transaction.category || "none"}</td>
-              <td>
-                {
-                  formatDate(transaction.createdAt)
-                }
-              </td>
+              <td>{formatDate(transaction.date)}</td>
               <td className="delete-transaction">
-                <img src={trashImg} alt="delete transaction icon" onClick={handleDeleteTransaction} />
+                <img
+                  src={trashImg}
+                  alt="delete transaction icon"
+                  onClick={() => handleDeleteTransaction(transaction.id)}
+                />
               </td>
             </tr>
           ))}

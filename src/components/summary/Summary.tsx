@@ -25,6 +25,7 @@ const Summary = () => {
     }, {
         incomes: 0,
         outcomes: 0,
+        deleted: 0,
         total: 0,
     })
 

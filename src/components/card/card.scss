@@ -16,6 +16,11 @@
     &-header {
         display: flex;
         justify-content: space-between;
+
+        img {
+            width: 3.2rem;
+            height: 3.2rem;
+        }
     }
 
     &-amount {

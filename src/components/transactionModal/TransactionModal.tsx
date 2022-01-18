@@ -19,7 +19,7 @@ const TransactionModal = ({
 }: ModalProps) => {
   const today = new Date().toLocaleString().slice(0, 10);
 
-  const { createTransaction } = useContext(TransactionsContext);
+  const { dispatch } = useContext(TransactionsContext);
 
   const [transactionName, setTransactionName] = useState("");
   const [transactionAmount, setTransactionAmount] = useState(0);
@@ -47,13 +47,13 @@ const TransactionModal = ({
   const handleSubmitTransaction = async (e: FormEvent) => {
     e.preventDefault();
 
-    await createTransaction({
+    dispatch({type: "ADD_TRANSACTION", transaction: {
       name: transactionName,
       amount: transactionAmount,
       type: transactionType,
       category: transactionCategory,
-      createdAt: transactionDate,
-    });
+      date: transactionDate
+    }})
 
     // Reset form values;
     setTransactionName("");

@@ -2,7 +2,7 @@
 
 .transactions {
   width: 100%;
-  margin-top: 5rem;
+  margin: 5rem 0;
 
   table {
     width: 100%;
@@ -21,7 +21,7 @@
 
     tbody tr {
       background-color: $white-color;
-      animation: bounceInLeft 1.5s forwards;
+      animation: bounceInLeft 1.2s forwards;
       visibility: hidden;
 
       @keyframes bounceInLeft {
