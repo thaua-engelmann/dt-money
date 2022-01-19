@@ -21,6 +21,7 @@ dt money is a simple, but very effective application to manage your finances. It
 ## Screenshots, gifs
 <p>
   <img src="https://user-images.githubusercontent.com/88341281/150044087-ec0861f9-29cd-45c9-9fca-6b8d4f8e742a.png" width="400" />
+  <img src="" width="400" />
 </p>
 
 ## Challenges faced
