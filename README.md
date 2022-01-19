@@ -19,6 +19,9 @@
 dt money is a simple, but very effective application to manage your finances. It allows you to register new incomes, outcomes and automatically calculates a final total based on the values you've entered. You can also set categories to each transaction, a date to your transaction and yet, if you want to, delete a transaction.
 
 ## Screenshots, gifs
+<p>
+  
+</p>
 
 ## Challenges faced
 
