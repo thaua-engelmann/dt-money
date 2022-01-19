@@ -1,5 +1,9 @@
 # dt money | expanse tracker
 
+<p>
+  <img src="https://img.shields.io/badge/made%20by-Thau%C3%A3%20Engelmann-%235429cc" />
+  <img src="https://img.shields.io/github/languages/count/thaua-engelmann/expanse-tracker?color=%235429cc" />
+</p>
 
 dt money is a simple, but very effective application to manage your finances. It allows you to register new incomes, outcomes and automatically calculates a final total based on the values you've entered. You can also set categories to each transaction, a date to your transaction and yet, if you want to, delete a transaction. 
 
